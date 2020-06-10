@@ -1,10 +1,16 @@
-CFLAGS = -shared -fPIC -O3 -std=c99 -pedantic
+CFLAGS = -O3 -flto -std=c99 -pedantic -Wall
 CPPFLAGS = -D_DEFAULT_SOURCE
 
-all: 
-	gcc ${CFLAGS} ${CPPFLAGS} cmap.c -o libcmap.so
+all: libcmap.a
+
+libcmap.a: libcmap.o
+	ar rc $@ $?
+	ranlib $@
+
+libcmap.o: cmap.h
+	gcc -c cmap.c ${CFLAGS} ${CPPFLAGS} -o $@
 
 clean:
-	rm -f libcmap.so
+	rm -f libcmap.a libcmap.o
 
 .PHONY: all clean
