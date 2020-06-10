@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <unistd.h>
-#include "colourmap.h"
+#include "cmap.h"
 
 struct colourmap * read_map(const char * mapfile) {
 	/*
