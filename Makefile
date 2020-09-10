@@ -7,7 +7,7 @@ libcmap.a: libcmap.o
 	ar rc $@ $?
 	ranlib $@
 
-libcmap.o: cmap.h
+libcmap.o: cmap.c cmap.h
 	gcc -c cmap.c ${CFLAGS} ${CPPFLAGS} -o $@
 
 clean:

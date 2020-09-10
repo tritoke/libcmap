@@ -2,6 +2,8 @@
 #include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <sys/stat.h>
+#include <sys/types.h>
 #include <time.h>
 #include <unistd.h>
 #include "cmap.h"
@@ -11,16 +13,24 @@ struct colourmap * read_map(const char * mapfile) {
 	 * Read a colourmap file into a colourmap struct
 	 */
 
-	/* Initialise the pixel we will read items into */
-	size_t currlim = 256;
-	Pixel * pixels = calloc(currlim, sizeof(Pixel));
+	/* check we actually have a file */
+	struct stat mapfile_stat;
+	stat(mapfile, &mapfile_stat);
+	if (!S_ISREG(mapfile_stat.st_mode)) {
+		fputs("Mapfile is not a regular file, exiting.", stderr);
+		exit(EXIT_FAILURE);
+	}
 
 	/* Set up the file IO */
 	FILE * fp;
 	if ((fp = fopen(mapfile, "r")) == NULL) {
-		puts("Failed to open mapfile, exiting.");
+		fputs("Failed to open mapfile, exiting.", stderr);
 		exit(EXIT_FAILURE);
 	}
+
+	/* Initialise the pixel we will read items into */
+	size_t currlim = 256;
+	Pixel * pixels = calloc(currlim, sizeof(Pixel));
 
 	/* Parse the contents of the file */
 	char * buf = NULL;
