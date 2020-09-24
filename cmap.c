@@ -17,14 +17,14 @@ struct colourmap * read_map(const char * mapfile) {
 	struct stat mapfile_stat;
 	stat(mapfile, &mapfile_stat);
 	if (!S_ISREG(mapfile_stat.st_mode)) {
-		fputs("Mapfile is not a regular file, exiting.", stderr);
+		fputs("Mapfile is not a regular file, exiting.\n", stderr);
 		exit(EXIT_FAILURE);
 	}
 
 	/* Set up the file IO */
 	FILE * fp;
 	if ((fp = fopen(mapfile, "r")) == NULL) {
-		fputs("Failed to open mapfile, exiting.", stderr);
+		fputs("Failed to open mapfile, exiting.\n", stderr);
 		exit(EXIT_FAILURE);
 	}
 
@@ -75,7 +75,7 @@ struct colourmap * read_map(const char * mapfile) {
 
 	/* Check errno after getline fails */
 	if (errno == ENOMEM || errno == EINVAL) {
-		fputs("[read_map]\tgetline failed to read line", stderr);
+		fputs("[read_map]\tgetline failed to read line\n", stderr);
 		exit(EXIT_FAILURE);
 	}
 
