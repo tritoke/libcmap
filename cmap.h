@@ -1,4 +1,7 @@
+#pragma once
+
 #include <stdint.h> 
+
 /* Definition of a pixel value in farbfeld image spec */
 typedef struct {
 	uint16_t red;

@@ -82,6 +82,9 @@ struct colourmap * read_map(const char * mapfile) {
 	/* free the buffer used while reading in the lines */
 	free(buf);
 
+	/* close the file */
+	fclose(fp);
+
 	/* trim off the unused space in pixels array */
 	if ((pixels = reallocarray(pixels, colourno, sizeof(Pixel))) == NULL) {
 reallocarray_error:
