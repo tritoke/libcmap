@@ -1,6 +1,7 @@
 #pragma once
 
 #include <stdint.h> 
+#include <stddef.h> 
 
 /* Definition of a pixel value in farbfeld image spec */
 typedef struct {
