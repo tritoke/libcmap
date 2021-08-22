@@ -1,4 +1,4 @@
-CFLAGS = -O3 -flto -std=c99 -pedantic -Wall
+CFLAGS = -O3 -std=c99 -pedantic -Wall
 CPPFLAGS = -D_DEFAULT_SOURCE
 
 all: libcmap.a
